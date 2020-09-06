@@ -26,7 +26,6 @@ export class ProductoComponent implements OnInit {
     {field: 'precio_compra', header: 'Precio compra'},
     {field: 'precio_venta', header: 'Precio venta'},
     {field: 'idProveedor_fk', header: 'Proveedor'},
-    {field: 'acciones', header: ''}
   ];
 
   constructor(private productoService: ProductoService) { }

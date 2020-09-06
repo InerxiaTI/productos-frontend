@@ -1,5 +1,9 @@
 <h3>Gestión de mis productos</h3>
 <!-- [scrollable]="true" scrollHeight="200px" [responsive]="true"-->
+
+<span class="p-buttonset">
+    <button pButton type="button" label="Nuevo" icon="pi pi-plus" class="p-button-success"></button>
+</span>
 <p-card>
     <p-table #dt [value]="productosDto" [columns]="columnas" [lazy]="false" [responsive]="true" [style]="{width:'100%'}"
         [resizableColumns]="true" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[20,50,100]" [loading]="loading"
@@ -19,6 +23,7 @@
                 <th *ngFor="let col of columnas">
                     {{col.header}}
                 </th>
+                <th></th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-rowData let-columns="columns">
@@ -26,6 +31,10 @@
                 <td *ngFor="let col of columnas">
                     <span class="p-column-title">{{col.header}}</span>
                     {{rowData[col.field]}}
+                </td>
+                <td>
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="editProduct(product)"></button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProduct(product)"></button>
                 </td>
             </tr>
             <hr>
