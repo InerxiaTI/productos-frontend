@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import {TableModule} from 'primeng/table';
 import {CardModule} from 'primeng/card';
+import {TabViewModule} from 'primeng/tabview';
 
 import { ProductoService } from '../shared/service/producto.service'
 import { ProductoDto } from '../shared/dto/ProductoDto';

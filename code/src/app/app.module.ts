@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonModule } from 'primeng/button';
 import {TableModule} from 'primeng/table';
 import {CardModule} from 'primeng/card';
+import {TabViewModule} from 'primeng/tabview';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { BsDropdownModule} from 'ngx-bootstrap/dropdown';
@@ -44,6 +45,7 @@ export function createTranslateLoader(http: HttpClient) {
     ButtonModule,
     TableModule,
     CardModule,
+    TabViewModule,
     NgbModule,
     BsDropdownModule,
     AlertModule,
