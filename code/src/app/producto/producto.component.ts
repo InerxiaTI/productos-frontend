@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
-import {TableModule} from 'primeng/table';
+import {TableModule, Table} from 'primeng/table';
 import {CardModule} from 'primeng/card';
 import {TabViewModule} from 'primeng/tabview';
 
@@ -17,6 +17,8 @@ export class ProductoComponent implements OnInit {
   loading: boolean;
   productosDto: Array<ProductoDto> = [];
   productoDto: ProductoDto;
+
+  @ViewChild('dt') table: Table;
 
   columnas = [
     {field: 'foto', header: 'Foto'},
@@ -48,4 +50,17 @@ export class ProductoComponent implements OnInit {
     });
   }
 
+  onActivityChange(event) {
+    const value = event.target.value;
+    if (value && value.trim().length) {
+        const activity = parseInt(value);
+
+        if (!isNaN(activity)) {
+            this.table.filter(activity, 'activity', 'gte');
+        }
+    }
+  }
+
 }
+
+
