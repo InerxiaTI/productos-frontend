@@ -1,18 +1,40 @@
-<p-table [value]="productosDto">
-    <ng-template pTemplate="header">
-        <tr>
-            <th>Vin</th>
-            <th>Year</th>
-            <th>Brand</th>
-            <th>Color</th>
-        </tr>
+<p-card>
+    <h3>Gestión de mis productos</h3>
+</p-card>
+<p-card>
+    <!-- [scrollable]="true" [style]="{width:'100%'}" [resizableColumns]="true" scrollHeight="200px" -->
+    <p-table [value]="productosDto" [columns]="columnas"
+            [lazy]="false" 
+            [responsive]="true"
+            [paginator]="true" [rows]="20" [rowsPerPageOptions]="[20,50,100]"
+            [loading]="loading" 
+    >
+    <ng-template pTemplate="colgroup" let-columns>
+        <colgroup>
+            <col style="width:250px">
+            <col style="width:250px">
+            <col style="width:250px">
+            <col style="width:250px">
+            <col style="width:250px">
+            <col style="width:50px">
+            <col style="width:50px">
+        </colgroup>
     </ng-template>
-    <ng-template pTemplate="body" let-producto>
-        <tr>
-            <td>{{producto.nombre}}</td>
-            <td>{{producto.precio_compra}}</td>
-            <td>{{producto.precio_venta}}</td>
-            <td>{{producto.idProveedor_fk}}</td>
-        </tr>
-    </ng-template>
-</p-table>
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th *ngFor="let col of columnas">
+                    {{col.header}}
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr>
+                <td *ngFor="let col of columnas">
+                        {{rowData[col.field]}}
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</p-card>
+
+

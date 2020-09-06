@@ -10,6 +10,11 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonModule } from 'primeng/button';
 import {TableModule} from 'primeng/table';
+import {CardModule} from 'primeng/card';
+
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { BsDropdownModule} from 'ngx-bootstrap/dropdown';
+import { AlertModule } from 'ngx-bootstrap/alert';
 
 import { ProductoComponent } from './producto/producto.component';
 import { ProveedorComponent } from './proveedor/proveedor.component';
@@ -38,6 +43,10 @@ export function createTranslateLoader(http: HttpClient) {
     AppRoutingModule,
     ButtonModule,
     TableModule,
+    CardModule,
+    NgbModule,
+    BsDropdownModule,
+    AlertModule,
     BrowserAnimationsModule
   ],
   providers: [],
