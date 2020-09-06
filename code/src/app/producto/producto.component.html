@@ -1,1 +1,18 @@
-<p>producto works!</p>
+<p-table [value]="productosDto">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Vin</th>
+            <th>Year</th>
+            <th>Brand</th>
+            <th>Color</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-producto>
+        <tr>
+            <td>{{producto.nombre}}</td>
+            <td>{{producto.precio_compra}}</td>
+            <td>{{producto.precio_venta}}</td>
+            <td>{{producto.idProveedor_fk}}</td>
+        </tr>
+    </ng-template>
+</p-table>
