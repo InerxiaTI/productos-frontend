@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 
 import {TableModule, Table} from 'primeng/table';
 import {CardModule} from 'primeng/card';
@@ -28,7 +29,9 @@ export class ProductoComponent implements OnInit {
     {field: 'idProveedor_fk', header: 'Proveedor'},
   ];
 
-  constructor(private productoService: ProductoService) { }
+  constructor(
+    private productoService: ProductoService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.getAllProductos();
@@ -59,6 +62,8 @@ export class ProductoComponent implements OnInit {
         }
     }
   }
+
+
 
 }
 

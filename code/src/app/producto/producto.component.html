@@ -1,8 +1,8 @@
-<h3>Gestión de mis productos</h3>
+<h5>Gestión de mis productos</h5>
 <!-- [scrollable]="true" scrollHeight="200px" [responsive]="true"-->
 
 <span class="p-buttonset">
-    <button pButton type="button" label="Nuevo" icon="pi pi-plus" class="p-button-success"></button>
+    <button [routerLink]="['/form-producto']" pButton type="button" label="Nuevo" icon="pi pi-plus" class="p-button-success"></button>
 </span>
 <p-card>
     <p-table #dt [value]="productosDto" [columns]="columnas" [lazy]="false" [responsive]="true" [style]="{width:'100%'}"
