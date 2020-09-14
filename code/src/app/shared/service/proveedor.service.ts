@@ -16,23 +16,23 @@ export class ProveedorService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getProductoById(id: number): any {
+  getProveedorById(id: number): any {
     return this.httpClient.get<ProveedorDto>(`${urlBase}/proveedor/get-por-id/${id}`, httpOptions);
   }
 
-  getAllProductos(): Observable<any> {
+  getAllProveedores(): Observable<any> {
     return this.httpClient.get<ProveedorDto[]>(`${urlBase}/proveedor/get-todos`, httpOptions);
   }
 
-  createProducto(proveedorDto: ProveedorDto): Observable<any> {
+  createProveedor(proveedorDto: ProveedorDto): Observable<any> {
     return this.httpClient.post(urlBase.concat('/proveedor'), proveedorDto, httpOptions);
   }
 
-  editProducto(proveedorDto: ProveedorDto): Observable<any> {
+  editProveedor(proveedorDto: ProveedorDto): Observable<any> {
     return this.httpClient.put(urlBase.concat('/proveedor'), proveedorDto, httpOptions);
   }
 
-  deleteProducto(id: number): Observable<any> {
+  deleteProveedor(id: number): Observable<any> {
     return this.httpClient.delete(`${urlBase}/proveedor/${id}`, httpOptions);
   }
 }
