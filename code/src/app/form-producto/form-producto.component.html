@@ -4,42 +4,49 @@
         class="p-button-primary"></button>
 </span>
 <p-card>
-    <div class="p-fluid">
-        <div class="p-field">
-            <label for="nombre">Nombre</label>
-            <input id="nombre" type="text" pInputText>
-        </div><br>
-        <div class="p-field">
-            <label for="descripcion">Descripción</label>
-            <input id="descripcion" type="text" pInputText>
-        </div><br>
-        <div class="p-field">
-            <label for="precio_compra">Precio compra</label>
-            <input id="precio_compra" type="number" pInputText>
-        </div><br>
-        <div class="p-field">
-            <label for="precio_venta">Precio venta</label>
-            <input id="precio_venta" type="number" pInputText>
-        </div><br>
-        <div class="p-field">
-            <label for="iva">IVA</label>
-            <p-dropdown inputId="iva" [options]="ivas" [(ngModel)]="selectedIva" placeholder="Select" optionLabel="name"></p-dropdown>
-        </div><br>
-        <div class="p-field">
-            <label for="marca">Marca</label>
-            <input id="marca" type="text" pInputText>
-        </div><br>
-        <div class="p-field">
-            <label for="fecha_compra">Fecha compra</label>
-            <input id="fecha_compra" type="date" pInputText>
-        </div><br>
-        <div class="p-field">
-            <label for="foto">Foto</label>
-            <input id="foto" type="file" pInputText>
-        </div><br>
-        <div class="p-field">
-            <label for="idProveedor_fk">Proveedor</label>
-            <p-dropdown inputId="idProveedor_fk" [options]="ivas" [(ngModel)]="selectedIva" placeholder="Select" optionLabel="name"></p-dropdown>
-        </div><br>
-    </div>
+    <form [formGroup]="productoForm">
+        <div class="p-fluid">
+            <div class="p-field">
+                <label for="nombre">Nombre<span class="text-danger">*</span></label>
+                <input name="nombre" id="nombre" formControlName="nombre" maxlength="100" required type="text"
+                    pInputText>
+            </div><br>
+            <div class="p-field">
+                <label for="descripcion">Descripción</label>
+                <input name="descripcion" id="descripcion" formControlName="descripcion" maxlength="255" type="text"
+                    pInputText>
+            </div><br>
+            <div class="p-field">
+                <label for="precio_compra">Precio de compra<span class="text-danger">*</span></label>
+                <input name="precio_compra" id="precio_compra" formControlName="precio_compra" maxlength="11" required
+                    type="number" pInputText>
+            </div><br>
+            <div class="p-field">
+                <label for="precio_venta">Precio de venta<span class="text-danger">*</span></label>
+                <input name="precio_venta" id="precio_venta" formControlName="precio_venta" maxlength="11" required
+                    type="number" pInputText>
+            </div><br>
+            <div class="p-field">
+                <label for="iva">IVA<span class="text-danger">*</span></label>
+                <p-dropdown name="iva" id="iva" formControlName="iva" required placeholder="Seleccionar" 
+                            [options]="ivas" appendTo="body" optionLabel="name" ></p-dropdown>
+            </div><br>
+            <div class="p-field">
+                <label for="marca">Marca</label>
+                <input name="marca" id="marca" formControlName="marca" maxlength="100" type="text"
+                    pInputText>
+            </div><br>
+            <div class="p-field">
+                <label for="fecha_compra">Fecha compra<span class="text-danger">*</span></label>
+                <p-calendar name="fecha_compra" id="fecha_compra" formControlName="fecha_compra" showIcon="true" [defaultDate]="today"></p-calendar> 
+            </div><br>
+            <div class="p-field">
+                <label for="idProveedor_fk">Proveedor<span class="text-danger">*</span></label>
+                <p-dropdown name="idProveedor_fk" id="idProveedor_fk" formControlName="idProveedor_fk" required placeholder="Seleccionar" 
+                            [options]="proveedoresDto" appendTo="body" optionLabel="nombre_empresa" ></p-dropdown>
+            </div><br>
+
+        </div>
+    </form>
+    <button pButton type="button" label="Guardar" class="p-button-lg btn-block" (click)="guardar()"></button>
 </p-card>
