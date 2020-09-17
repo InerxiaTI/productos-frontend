@@ -6,6 +6,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ProductoService } from '../shared/service/producto.service';
 import { ProveedorService } from '../shared/service/proveedor.service';
 import { ProveedorDto } from '../shared/dto/ProveedorDto';
+import { ProductoDto } from '../shared/dto/ProductoDto';
 
 @Component({
   selector: 'app-form-producto',
@@ -15,22 +16,24 @@ import { ProveedorDto } from '../shared/dto/ProveedorDto';
 export class FormProductoComponent implements OnInit {
 
   selectedIva: any = null;
+  productoDto = new ProductoDto();
+
   proveedoresDto: Array<ProveedorDto> = [];
   proveedorDto: ProveedorDto;
   today = new Date();
 
   ivas: any[] = [
-    { name: 'IVA 19%', key: 'A' },
-    { name: 'IVA 10%', key: 'M' },
-    { name: 'IVA 5%', key: 'P' },
-    { name: 'NO', key: 'N' }];
+    { name: 'IVA 19%', value: 19 },
+    { name: 'IVA 10%', value: 10 },
+    { name: 'IVA 5%', value: 5 },
+    { name: 'NO', value: 0 }];
 
   productoForm = new FormGroup({
     nombre: new FormControl('', Validators.required),
     descripcion: new FormControl(''),
     precio_compra: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+(.[0-9]{0,6})?$')]),
     precio_venta: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+(.[0-9]{0,6})?$')]),
-    iva: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+(.[0-9]{0,6})?$')]),
+    iva: new FormControl('', Validators.required),
     marca: new FormControl(''),
     fecha_compra: new FormControl('', Validators.required),
     foto: new FormControl(''),
@@ -43,13 +46,10 @@ export class FormProductoComponent implements OnInit {
     private router: Router,
     private _location: Location
   ) {
-    this.today= new Date();
    }
 
   ngOnInit(): void {
-    this.getAllProveedores();
-    console.log(this.today);
-    
+    this.getAllProveedores();   
     
   }
 
@@ -59,15 +59,41 @@ export class FormProductoComponent implements OnInit {
         return;
       }
       this.proveedoresDto = data.body;
-      console.log(this.proveedoresDto);
     }, error => {
       console.log('Error'.concat(error));
     }, () => {
     });
   }
+
+  onSubmit() {
+    if (this.productoForm.invalid) {
+      return;
+    }
+    this.assignData();
+    this.guardar();
+  }
+
+  assignData() {
+    this.productoDto.nombre = this.productoForm.value.nombre;
+    this.productoDto.descripcion = this.productoForm.value.descripcion;
+    this.productoDto.precio_compra = this.productoForm.value.precio_compra;
+    this.productoDto.precio_venta = this.productoForm.value.precio_venta;
+    this.productoDto.iva = this.productoForm.value.iva.value;
+    this.productoDto.marca = this.productoForm.value.marca;
+    this.productoDto.fecha_compra = this.productoForm.value.fecha_compra;
+    this.productoDto.foto = "url de la foto";
+    this.productoDto.idProveedor_fk = this.productoForm.value.idProveedor_fk.id; 
+  }
+
   guardar(){
-    console.log(this.productoForm.value.fecha_compra);
-    
+    this.productoService.createProducto(this.productoDto).subscribe(data => {
+      if (!data.body) {
+        return;
+      }      
+    }, error => {
+      console.log('Error'.concat(error));
+    }, () => {
+    });
   }
 
   goBack() {

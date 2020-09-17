@@ -44,7 +44,6 @@ export class ProductoComponent implements OnInit {
         return;
       }
       this.productosDto = data.body;
-      console.log(this.productosDto);
     }, error => {
       console.log('Error'.concat(error));
     }, () => {
