@@ -48,5 +48,8 @@
 
         </div>
     </form>
-    <button pButton type="button" label="Guardar" class="p-button-lg btn-block" (click)="onSubmit()"></button>
+    <button pButton type="button" label="Guardar" pRipple class="p-button-lg btn-block" (click)="onSubmit()"
+            [disabled]="!productoForm.valid"></button>
 </p-card>
+
+<p-toast position="top-left" key="tc"></p-toast>

@@ -1,9 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
-import {TableModule, Table} from 'primeng/table';
-import {CardModule} from 'primeng/card';
-import {TabViewModule} from 'primeng/tabview';
+import {Table} from 'primeng/table';
 
 import { ProductoService } from '../shared/service/producto.service'
 import { ProductoDto } from '../shared/dto/ProductoDto';

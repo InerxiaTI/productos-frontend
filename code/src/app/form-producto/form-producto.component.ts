@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {MessageService} from 'primeng/api';
+import { PrimeNGConfig } from 'primeng/api';
+
 
 import { ProductoService } from '../shared/service/producto.service';
 import { ProveedorService } from '../shared/service/proveedor.service';
@@ -11,7 +14,8 @@ import { ProductoDto } from '../shared/dto/ProductoDto';
 @Component({
   selector: 'app-form-producto',
   templateUrl: './form-producto.component.html',
-  styleUrls: ['./form-producto.component.css']
+  styleUrls: ['./form-producto.component.css'],
+  providers: [MessageService]
 })
 export class FormProductoComponent implements OnInit {
 
@@ -44,13 +48,15 @@ export class FormProductoComponent implements OnInit {
     private productoService: ProductoService,
     private proveedorService: ProveedorService,
     private router: Router,
-    private _location: Location
+    private _location: Location,
+    private messageService: MessageService,
+    private primengConfig: PrimeNGConfig
   ) {
    }
 
   ngOnInit(): void {
+    this.primengConfig.ripple = true;
     this.getAllProveedores();   
-    
   }
 
   getAllProveedores() {
@@ -88,12 +94,23 @@ export class FormProductoComponent implements OnInit {
   guardar(){
     this.productoService.createProducto(this.productoDto).subscribe(data => {
       if (!data.body) {
+        this.mostrarToast('error', 'Error','No fue guardado');
         return;
-      }      
+      }
+      this.mostrarToast('success', 'Guardado','Producto guardado correctamente');
+      this.productoForm.reset();
     }, error => {
       console.log('Error'.concat(error));
     }, () => {
     });
+  }
+
+  mostrarToast(severity: any, summary: any,detail: any){
+    this.messageService.add({
+      key: 'tc', 
+      severity:severity, 
+      summary: summary, 
+      detail: detail});
   }
 
   goBack() {

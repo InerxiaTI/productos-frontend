@@ -19,6 +19,7 @@ import {TableModule} from 'primeng/table';
 import {CardModule} from 'primeng/card';
 import {TabViewModule} from 'primeng/tabview';
 import {CalendarModule} from 'primeng/calendar';
+import {ToastModule} from 'primeng/toast';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { BsDropdownModule} from 'ngx-bootstrap/dropdown';
@@ -66,6 +67,7 @@ export function createTranslateLoader(http: HttpClient) {
     CheckboxModule,
     RadioButtonModule,
     DropdownModule,
+    ToastModule,
     InputTextareaModule
   ],
   providers: [],
