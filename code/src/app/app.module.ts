@@ -20,6 +20,8 @@ import {CardModule} from 'primeng/card';
 import {TabViewModule} from 'primeng/tabview';
 import {CalendarModule} from 'primeng/calendar';
 import {ToastModule} from 'primeng/toast';
+import { MessagesModule } from 'primeng/messages';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { BsDropdownModule} from 'ngx-bootstrap/dropdown';
@@ -68,8 +70,10 @@ export function createTranslateLoader(http: HttpClient) {
     RadioButtonModule,
     DropdownModule,
     ToastModule,
-    InputTextareaModule
-  ],
+    InputTextareaModule,
+    MessagesModule,
+    ConfirmDialogModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

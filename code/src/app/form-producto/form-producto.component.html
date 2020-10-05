@@ -29,7 +29,7 @@
             <div class="p-field">
                 <label for="iva">IVA<span class="text-danger">*</span></label>
                 <p-dropdown name="iva" id="iva" formControlName="iva" required placeholder="Seleccionar" 
-                            [options]="ivas" appendTo="body" optionLabel="name" ></p-dropdown>
+                            [options]="ivas" appendTo="body" optionLabel="name" [(ngModel)]="ivaNg"></p-dropdown>
             </div><br>
             <div class="p-field">
                 <label for="marca">Marca</label>
@@ -43,13 +43,13 @@
             <div class="p-field">
                 <label for="idProveedor_fk">Proveedor<span class="text-danger">*</span></label>
                 <p-dropdown name="idProveedor_fk" id="idProveedor_fk" formControlName="idProveedor_fk" required placeholder="Seleccionar" 
-                            [options]="proveedoresDto" appendTo="body" optionLabel="nombre_empresa" ></p-dropdown>
+                            [options]="proveedoresDto" appendTo="body" optionLabel="nombre_empresa" [(ngModel)]="proveedorNg"></p-dropdown>
             </div><br>
 
         </div>
     </form>
-    <button pButton type="button" label="Guardar" pRipple class="p-button-lg btn-block" (click)="onSubmit()"
+    <button pButton type="button" [label]="labelBoton" pRipple class="p-button-lg btn-block" (click)="onSubmit()"
             [disabled]="!productoForm.valid"></button>
 </p-card>
 
-<p-toast position="top-left" key="tc"></p-toast>
+<p-toast position="top-left" [style]="{width: '90vw'}" key="tc"></p-toast>

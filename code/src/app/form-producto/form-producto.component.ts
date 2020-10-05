@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {MessageService} from 'primeng/api';
 import { PrimeNGConfig } from 'primeng/api';
-
 
 import { ProductoService } from '../shared/service/producto.service';
 import { ProveedorService } from '../shared/service/proveedor.service';
@@ -24,7 +23,13 @@ export class FormProductoComponent implements OnInit {
 
   proveedoresDto: Array<ProveedorDto> = [];
   proveedorDto: ProveedorDto;
+  proveedorNg = new ProveedorDto();
+  ivaNg: any;
   today = new Date();
+  labelBoton: string;
+  
+  public accion!: any;
+  public idProductoRuta!: number;
 
   ivas: any[] = [
     { name: 'IVA 19%', value: 19 },
@@ -48,15 +53,61 @@ export class FormProductoComponent implements OnInit {
     private productoService: ProductoService,
     private proveedorService: ProveedorService,
     private router: Router,
+    private activatedRoute: ActivatedRoute,
     private _location: Location,
     private messageService: MessageService,
-    private primengConfig: PrimeNGConfig
+    private primengConfig: PrimeNGConfig,
   ) {
+    this.labelBoton="Guardar";
    }
 
   ngOnInit(): void {
+    this.activatedRoute.params.subscribe(
+      params =>{
+        this.accion = params.accion;
+        this.idProductoRuta = params.id;
+        if(this.accion === 'editar'){
+          this.labelBoton="Actualizar";
+          this.getProducto(this.idProductoRuta);
+        }
+      }
+    )
+    
     this.primengConfig.ripple = true;
     this.getAllProveedores();   
+  }
+
+  updateForm() {
+    this.proveedorNg = this.proveedoresDto.find(element => element.id == this.productoDto.idProveedor_fk);  
+    this.ivaNg = this.ivas.find(element => element.value == this.productoDto.iva);    
+    
+    let fecha = new Date(this.productoDto.fecha_compra)
+    fecha.setHours(fecha.getHours()+5); 
+
+    this.productoForm.setValue({
+      nombre: this.productoDto.nombre,
+      descripcion: this.productoDto.descripcion,
+      precio_compra: this.productoDto.precio_compra,
+      precio_venta: this.productoDto.precio_venta,
+      iva: this.ivaNg,
+      marca: this.productoDto.marca,
+      fecha_compra: fecha,
+      foto: this.productoDto.foto,
+      idProveedor_fk: this.proveedorNg,
+    });
+
+  }
+
+  getProducto(id: number){
+    this.productoService.getProductoById(id).subscribe(
+      data=>{
+        if (!data.body) {
+          return;
+        }
+        this.productoDto=data.body;
+        this.updateForm();
+      }
+    )
   }
 
   getAllProveedores() {
@@ -75,8 +126,13 @@ export class FormProductoComponent implements OnInit {
     if (this.productoForm.invalid) {
       return;
     }
-    this.assignData();
-    this.guardar();
+    if(this.accion === 'editar'){
+      this.assignData();
+      this.editar();
+    }else{
+      this.assignData();
+      this.guardar();
+    }
   }
 
   assignData() {
@@ -99,6 +155,23 @@ export class FormProductoComponent implements OnInit {
       }
       this.mostrarToast('success', 'Guardado','Producto guardado correctamente');
       this.productoForm.reset();
+    }, error => {
+      console.log('Error'.concat(error));
+    }, () => {
+    });
+  }
+
+  editar(){
+    this.productoService.editProducto(this.productoDto).subscribe(data => {
+      if (!data.body) {
+        this.mostrarToast('error', 'Error','No fue actualizado');
+        return;
+      }
+      this.mostrarToast('success', 'Actualizado','Producto actualizado correctamente');
+      this.productoForm.reset();
+      setTimeout( s =>{
+        this.router.navigate(['/producto/']);  
+      },2000);
     }, error => {
       console.log('Error'.concat(error));
     }, () => {

@@ -1,8 +1,8 @@
-<h5>Gestión de mis productos</h5>
+<h2>Gestión de mis productos</h2>
 <!-- [scrollable]="true" scrollHeight="200px" [responsive]="true"-->
 
 <span class="p-buttonset">
-    <button [routerLink]="['/form-producto']" pButton type="button" label="Nuevo" icon="pi pi-plus" class="p-button-success"></button>
+    <button [routerLink]="['/form-producto/crear/',0]" pButton type="button" label="Nuevo" icon="pi pi-plus" class="p-button-success"></button>
 </span>
 <p-card>
     <p-table #dt [value]="productosDto" [columns]="columnas" [lazy]="false" [responsive]="true" [style]="{width:'100%'}"
@@ -33,11 +33,15 @@
                     {{rowData[col.field]}}
                 </td>
                 <td>
-                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="editProduct(product)"></button>
-                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProduct(product)"></button>
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="editProducto(rowData)"></button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProducto(rowData)"></button>
                 </td>
             </tr>
             <hr>
         </ng-template>
     </p-table>
 </p-card>
+
+<p-confirmDialog [style]="{width: '100vw'}" [baseZIndex]="10000"></p-confirmDialog>
+<p-toast position="top-left" [style]="{width: '90vw'}" key="tc"></p-toast>
+
