@@ -1,3 +1,5 @@
+import { ProveedorDto } from './ProveedorDto';
+
 export class ProductoDto {
     id: number;
     nombre: string;
@@ -9,4 +11,7 @@ export class ProductoDto {
     fecha_compra: Date;
     foto: string;
     idProveedor_fk: number;
+    proveedor_fk: ProveedorDto;
+    nombre_empresa: string;
+    nombre_vendedor: string;
 }

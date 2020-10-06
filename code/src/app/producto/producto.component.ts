@@ -9,6 +9,8 @@ import { Table } from 'primeng/table';
 
 import { ProductoService } from '../shared/service/producto.service'
 import { ProductoDto } from '../shared/dto/ProductoDto';
+import { ProveedorService } from '../shared/service/proveedor.service';
+import { ProveedorDto } from '../shared/dto/ProveedorDto';
 
 @Component({
   selector: 'app-producto',
@@ -18,7 +20,7 @@ import { ProductoDto } from '../shared/dto/ProductoDto';
 })
 export class ProductoComponent implements OnInit {
   @ViewChild('dt', { static: false }) table: Table;
-  loading: boolean;
+  loading: boolean = true;
   productosDto: Array<ProductoDto> = [];
   productoDto: ProductoDto;
 
@@ -29,13 +31,17 @@ export class ProductoComponent implements OnInit {
   columnas = [
     { field: 'foto', header: 'Foto' },
     { field: 'nombre', header: 'Nombre' },
+    { field: 'descripcion', header: 'Descripción' },
     { field: 'precio_compra', header: 'Precio compra' },
     { field: 'precio_venta', header: 'Precio venta' },
-    { field: 'idProveedor_fk', header: 'Proveedor' },
+    { field: 'iva', header: 'IVA' },
+    { field: 'marca', header: 'Marca' },
+    { field: 'nombre_empresa', header: 'Proveedor' },
   ];
 
   constructor(
     private productoService: ProductoService,
+    private proveedorService: ProveedorService,
     private router: Router,
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
@@ -53,12 +59,19 @@ export class ProductoComponent implements OnInit {
         return;
       }
       this.productosDto = data.body;
+      this.productosDto.forEach(p=>{
+        p.nombre_empresa = p.proveedor_fk.nombre_empresa;
+        p.nombre_vendedor = p.proveedor_fk.nombre_vendedor;
+      });
+      console.log(this.productosDto);
+      
     }, error => {
       console.log('Error'.concat(error));
     }, () => {
       this.loading = false;
     });
   }
+
 
   delete(producto: ProductoDto) {
     this.productoService.deleteProducto(producto.id).subscribe(
