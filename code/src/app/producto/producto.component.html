@@ -20,6 +20,7 @@
         </ng-template>
         <ng-template pTemplate="header" let-columns>
             <tr>
+                <th>Foto</th>
                 <th *ngFor="let col of columnas">
                     {{col.header}}
                 </th>
@@ -28,9 +29,41 @@
         </ng-template>
         <ng-template pTemplate="body" let-rowData let-columns="columns">
             <tr>
-                <td height="40" *ngFor="let col of columnas">
+                <td> 
+                    <img src="../../assets/def.png" width="100" height="100" alt="">
+                </td>
+                <!-- <td height="40" *ngFor="let col of columnas">
                     <span class="p-column-title">{{col.header}}</span>
-                    {{rowData[col.field]}}
+                    <label for="">{{rowData[col.field]}}</label>
+                </td> -->
+
+                <td height="40">
+                    <span class="p-column-title">Nombre</span>
+                    <label for="">{{rowData['nombre']}}</label>
+                </td>
+                <td height="40">
+                    <span class="p-column-title">Descripción</span>
+                    <label for="">{{rowData['descripcion']}}</label>
+                </td>
+                <td height="40">
+                    <span class="p-column-title">Precio compra</span>
+                    <label for="">{{rowData['precio_compra'] | number}}</label>
+                </td>
+                <td height="40">
+                    <span class="p-column-title">Precio venta</span>
+                    <label for="">{{rowData['precio_venta'] | number}}</label>
+                </td>
+                <td height="40">
+                    <span class="p-column-title">IVA</span>
+                    <label for="">{{rowData['iva']}}</label>
+                </td>
+                <td height="40">
+                    <span class="p-column-title">Marca</span>
+                    <label for="">{{rowData['marca']}}</label>
+                </td>
+                <td height="40">
+                    <span class="p-column-title">Proveedor</span>
+                    <label for="">{{rowData['nombre_empresa']}}</label>
                 </td>
                 <td>
                     <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="editProducto(rowData)"></button>

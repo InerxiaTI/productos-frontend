@@ -29,7 +29,6 @@ export class ProductoComponent implements OnInit {
   msgs: Message[] = [];
 
   columnas = [
-    { field: 'foto', header: 'Foto' },
     { field: 'nombre', header: 'Nombre' },
     { field: 'descripcion', header: 'Descripción' },
     { field: 'precio_compra', header: 'Precio compra' },
