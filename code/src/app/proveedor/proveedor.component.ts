@@ -24,15 +24,14 @@ export class ProveedorComponent implements OnInit {
 
   public idProveedorRuta!: number;
 
+  displayMostrar: boolean = false;
+  proveedorMostrar: ProveedorDto = new ProveedorDto();
+
   msgs: Message[] = [];
 
   columnas = [
     { field: 'nombre_empresa', header: 'Nombre' },
     { field: 'telefono_empresa', header: 'Teléfono' },
-    { field: 'direccion_empresa', header: 'Dirección' },
-    { field: 'nombre_vendedor', header: 'Nombre vendedor' },
-    { field: 'telefono_vendedor', header: 'Teléfono vendedor' },
-    { field: 'observacion', header: 'Observación' },
   ];
 
   constructor(
@@ -95,6 +94,11 @@ export class ProveedorComponent implements OnInit {
 
   editProveedor(proveedor: ProveedorDto){
     this.router.navigate(['/form-proveedor/editar/', proveedor.id]);   
+  }
+
+  mostrarProveedor(proveedor: ProveedorDto){
+    this.displayMostrar = true;
+    this.proveedorMostrar =proveedor;
   }
 
   mostrarToast(severity: any, summary: any, detail: any) {

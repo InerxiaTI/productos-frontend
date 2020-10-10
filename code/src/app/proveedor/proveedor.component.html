@@ -1,4 +1,4 @@
-<h2>Gestión de mis proveedorres</h2>
+<h2>Gestión de mis proveedores</h2>
 
 <span class="p-buttonset">
     <button [routerLink]="['/form-proveedor/crear/',0]" pButton type="button" label="Nuevo" icon="pi pi-plus" class="p-button-success"></button>
@@ -39,31 +39,45 @@
                     <p class="p-column-title">Teléfono</p>
                     {{rowData['telefono_empresa']}}
                 </td>
-                <td height="40">
-                    <p class="p-column-title">Dirección</p>
-                    {{rowData['direccion_empresa']}}
-                </td>
-                <td height="40">
-                    <p class="p-column-title">Nombre Vendedor</p> 
-                    {{rowData['nombre_vendedor']}}
-                </td>
-                <td height="40">
-                    <p class="p-column-title">Teléfono</p>
-                    {{rowData['telefono_vendedor']}}
-                </td>
-                <td height="40">
-                    <p class="p-column-title">Observación</p>
-                    {{rowData['observacion']}}
-                </td>
                 <td>
                     <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="editProveedor(rowData)"></button>
                     <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProveedor(rowData)"></button>
+                    <button pButton pRipple icon="pi pi-eye" class="p-button-rounded p-button-info" (click)="mostrarProveedor(rowData)"></button>
+
                 </td>
             </tr>
             <hr>
         </ng-template>
     </p-table>
 </p-card>
+
+<p-dialog header="Ver proveedor" [(visible)]="displayMostrar" [style]="{width: '90vw'}" [contentStyle]="{'overflow': 'scrollable'}"
+        [modal]="true" [resizable]="false" appendTo="body">
+        <div class="container">
+            <p class="font-weight-bold text-center">Empresa</p>
+            <p class="font-weight-bold">Nombre:</p>
+            <div class="font-weight-normal wrapTexto">{{proveedorMostrar.nombre_empresa}}</div><br>
+        
+            <p class="font-weight-bold">Teléfono:</p>
+            <div class="font-weight-normal wrapTexto">{{proveedorMostrar.telefono_empresa}}</div><br>
+        
+            <p class="font-weight-bold">Dirección:</p>
+            <div class="font-weight-normal wrapTexto">{{proveedorMostrar.direccion_empresa}}</div><br>
+        
+            <p class="font-weight-bold text-center">Vendedor</p>
+            <p class="font-weight-bold">Nombre</p>
+            <div class="font-weight-normal wrapTexto">{{proveedorMostrar.nombre_vendedor}}</div><br>
+        
+            <p class="font-weight-bold">Teléfono:</p>
+            <div class="font-weight-normal wrapTexto">{{proveedorMostrar.telefono_vendedor}}</div><br>
+        
+            <p class="font-weight-bold">Observación:</p>
+            <div class="font-weight-normal wrapTexto">{{proveedorMostrar.observacion}}</div><br>
+        
+        </div>
+
+     
+</p-dialog>
 
 <p-confirmDialog [style]="{width: '100vw'}" [baseZIndex]="10000"></p-confirmDialog>
 <p-toast position="top-left" [style]="{width: '90vw'}" key="tc"></p-toast>

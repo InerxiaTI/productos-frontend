@@ -20,11 +20,11 @@
         </ng-template>
         <ng-template pTemplate="header" let-columns>
             <tr>
-                <th pResizableColumn>Foto</th>
-                <th pResizableColumn *ngFor="let col of columnas">
+                <th>Foto</th>
+                <th *ngFor="let col of columnas">
                     {{col.header}}
                 </th>
-                <th pResizableColumn></th>
+                <th></th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-rowData let-columns="columns">
@@ -37,7 +37,7 @@
                     <label>{{rowData[col.field]}}</label>
                 </td> -->
 
-                <td height="40" class="ui-resizable-column">
+                <td height="40" class="ui-resizable-column wrapTexto">
                     <p class="p-column-title">Nombre</p>
                     {{rowData['nombre']}}
                 </td>
@@ -56,7 +56,7 @@
                 <td>
                     <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="editProducto(rowData)"></button>
                     <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProducto(rowData)"></button>
-                    <button pButton pRipple icon="pi pi-eye" class="p-button-rounded p-button-warning" (click)="mostrarProducto(rowData)"></button>
+                    <button pButton pRipple icon="pi pi-eye" class="p-button-rounded p-button-info" (click)="mostrarProducto(rowData)"></button>
 
                 </td>
             </tr>
@@ -69,25 +69,25 @@
         [modal]="true" [resizable]="false" appendTo="body">
         <div class="container">
             <p class="font-weight-bold">Nombre:</p>
-            <p class="font-weight-normal">{{productoMostrar.nombre}}</p>
+            <div class="font-weight-normal wrapTexto">{{productoMostrar.nombre}}</div><br>
         
             <p class="font-weight-bold">Descripción:</p>
-            <p class="font-weight-normal p-mb-3 demo-container">{{productoMostrar.descripcion}}</p>
+            <div class="font-weight-normal wrapTexto">{{productoMostrar.descripcion}}</div><br>
         
             <p class="font-weight-bold">Precio compra:</p>
-            <p class="font-weight-normal">{{productoMostrar.precio_compra}}</p>
+            <div class="font-weight-normal wrapTexto">{{productoMostrar.precio_compra | number}}</div><br>
         
             <p class="font-weight-bold">Precio venta:</p>
-            <p class="font-weight-normal">{{productoMostrar.precio_venta}}</p>
+            <div class="font-weight-normal wrapTexto">{{productoMostrar.precio_venta | number}}</div><br>
         
             <p class="font-weight-bold">IVA:</p>
-            <p class="font-weight-normal">{{productoMostrar.iva}}%</p>
+            <div class="font-weight-normal wrapTexto">{{productoMostrar.iva}}%</div><br>
         
             <p class="font-weight-bold">Marca:</p>
-            <p class="font-weight-normal">{{productoMostrar.marca}}</p>
+            <div class="font-weight-normal wrapTexto">{{productoMostrar.marca}}</div><br>
         
             <p class="font-weight-bold">Proveedor:</p>
-            <p class="font-weight-normal">{{productoMostrar.nombre_empresa}}</p>
+            <div class="font-weight-normal wrapTexto">{{productoMostrar.nombre_empresa}}</div><br>
         </div>
 
      
