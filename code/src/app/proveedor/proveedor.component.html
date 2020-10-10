@@ -1,1 +1,69 @@
-<p>proveedor works!</p>
+<h2>Gestión de mis proveedorres</h2>
+
+<span class="p-buttonset">
+    <button [routerLink]="['/form-proveedor/crear/',0]" pButton type="button" label="Nuevo" icon="pi pi-plus" class="p-button-success"></button>
+</span>
+<p-card>
+    <p-table #dt [value]="proveedoresDto" [columns]="columnas" [lazy]="false" [responsive]="true" [style]="{width:'100%'}"
+        [resizableColumns]="true" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[20,50,100]" [loading]="loading"
+        [filterDelay]="0" [globalFilterFields]="['nombre_empresa','nombre_vendedor']">
+
+        <ng-template pTemplate="caption">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                <span class="p-input-icon-right">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                        placeholder="Buscar..." />
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th *ngFor="let col of columnas">
+                    {{col.header}}
+                </th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr>
+                <!-- <td height="40" *ngFor="let col of columnas">
+                    <span class="p-column-title">{{col.header}}</span>
+                    <label>{{rowData[col.field]}}</label>
+                </td> -->
+                <td height="40">
+                    <p class="p-column-title">Nombre</p>
+                    {{rowData['nombre_empresa']}}
+                </td>
+                <td height="40">
+                    <p class="p-column-title">Teléfono</p>
+                    {{rowData['telefono_empresa']}}
+                </td>
+                <td height="40">
+                    <p class="p-column-title">Dirección</p>
+                    {{rowData['direccion_empresa']}}
+                </td>
+                <td height="40">
+                    <p class="p-column-title">Nombre Vendedor</p> 
+                    {{rowData['nombre_vendedor']}}
+                </td>
+                <td height="40">
+                    <p class="p-column-title">Teléfono</p>
+                    {{rowData['telefono_vendedor']}}
+                </td>
+                <td height="40">
+                    <p class="p-column-title">Observación</p>
+                    {{rowData['observacion']}}
+                </td>
+                <td>
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="editProveedor(rowData)"></button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProveedor(rowData)"></button>
+                </td>
+            </tr>
+            <hr>
+        </ng-template>
+    </p-table>
+</p-card>
+
+<p-confirmDialog [style]="{width: '100vw'}" [baseZIndex]="10000"></p-confirmDialog>
+<p-toast position="top-left" [style]="{width: '90vw'}" key="tc"></p-toast>
