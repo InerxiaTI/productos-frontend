@@ -4,13 +4,10 @@ import { ConfirmationService } from 'primeng/api';
 import { Message } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 import { PrimeNGConfig } from 'primeng/api';
-
 import { Table } from 'primeng/table';
 
 import { ProductoService } from '../shared/service/producto.service'
 import { ProductoDto } from '../shared/dto/ProductoDto';
-import { ProveedorService } from '../shared/service/proveedor.service';
-import { ProveedorDto } from '../shared/dto/ProveedorDto';
 
 @Component({
   selector: 'app-producto',
@@ -24,23 +21,22 @@ export class ProductoComponent implements OnInit {
   productosDto: Array<ProductoDto> = [];
   productoDto: ProductoDto;
 
+  displayMostrar: boolean = false;
+  productoMostrar: ProductoDto = new ProductoDto();
+
   public idProductoRuta!: number;
 
   msgs: Message[] = [];
 
   columnas = [
     { field: 'nombre', header: 'Nombre' },
-    { field: 'descripcion', header: 'Descripción' },
     { field: 'precio_compra', header: 'Precio compra' },
     { field: 'precio_venta', header: 'Precio venta' },
-    { field: 'iva', header: 'IVA' },
-    { field: 'marca', header: 'Marca' },
     { field: 'nombre_empresa', header: 'Proveedor' },
   ];
 
   constructor(
     private productoService: ProductoService,
-    private proveedorService: ProveedorService,
     private router: Router,
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
@@ -62,8 +58,7 @@ export class ProductoComponent implements OnInit {
         p.nombre_empresa = p.proveedor_fk.nombre_empresa;
         p.nombre_vendedor = p.proveedor_fk.nombre_vendedor;
       });
-      console.log(this.productosDto);
-      
+
     }, error => {
       console.log('Error'.concat(error));
     }, () => {
@@ -106,6 +101,11 @@ export class ProductoComponent implements OnInit {
     this.router.navigate(['/form-producto/editar/', producto.id]);   
   }
 
+  mostrarProducto(producto: ProductoDto){
+    this.displayMostrar = true;
+    this.productoMostrar =producto;
+  }
+
   mostrarToast(severity: any, summary: any, detail: any) {
     this.messageService.add({
       key: 'tc',
@@ -125,8 +125,6 @@ export class ProductoComponent implements OnInit {
       }
     }
   }
-
-
 
 }
 
