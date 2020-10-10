@@ -1,0 +1,45 @@
+<div class="container">
+
+    <h2>Calculadora de IVA</h2>
+
+    <!-- <div class="p-grid p-fluid">
+        <div class="p-field p-col-12 p-md-3">
+            <label for="locale-german">Digita un valor</label> 
+            <div class="row">
+                <div class="col-10">
+                    <p-inputNumber [(ngModel)]="valor" mode="decimal" locale="de-DE" [minFractionDigits]="2">
+                    </p-inputNumber>
+                </div>
+                <div class="col-2">
+                    <p-button icon="pi pi-check"></p-button>
+                </div>
+            </div>
+
+        </div>
+    </div> -->
+    <div class="p-grid p-fluid">
+        <div class="p-field p-col-12 p-md-3">
+            <label for="locale-german">Digita un valor</label> 
+            <input type="number" pInputText [(ngModel)]="valor"> 
+        </div>
+    </div>
+    <br>
+    <div *ngFor="let iva of ivas" class="p-field-checkbox">
+        <p-radioButton name="{{iva.name}}" [value]="iva.value" [(ngModel)]="selectedIva" label="{{iva.name}}"></p-radioButton>
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col"><h2>Valor:</h2></div>
+        <div class="col"><p class="text-right">{{valor | number}}</p></div>
+    </div>
+    <div class="row">
+        <div class="col"><h2>Agregar IVA:</h2></div>
+        <div class="col"><p class="text-right">{{agregarIva(valor) | number}}</p></div>
+    </div>
+    <div class="row">
+        <div class="col"><h2>Quitar IVA:</h2></div>
+        <div class="col"><p class="text-right">{{quitarIva(valor) | number}}</p></div>
+    </div>
+
+</div>

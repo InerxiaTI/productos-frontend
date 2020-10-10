@@ -22,6 +22,7 @@ import {CalendarModule} from 'primeng/calendar';
 import {ToastModule} from 'primeng/toast';
 import { MessagesModule } from 'primeng/messages';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import {InputNumberModule} from 'primeng/inputnumber';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { BsDropdownModule} from 'ngx-bootstrap/dropdown';
@@ -30,6 +31,7 @@ import { AlertModule } from 'ngx-bootstrap/alert';
 import { ProductoComponent } from './producto/producto.component';
 import { ProveedorComponent } from './proveedor/proveedor.component';
 import { FormProductoComponent } from './form-producto/form-producto.component';
+import { CalculadorComponent } from './calculador/calculador.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -41,7 +43,8 @@ export function createTranslateLoader(http: HttpClient) {
     AppComponent,
     ProductoComponent,
     ProveedorComponent,
-    FormProductoComponent
+    FormProductoComponent,
+    CalculadorComponent
   ],
   imports: [
     HttpClientModule,
@@ -72,7 +75,8 @@ export function createTranslateLoader(http: HttpClient) {
     ToastModule,
     InputTextareaModule,
     MessagesModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    InputNumberModule
     ],
   providers: [],
   bootstrap: [AppComponent]

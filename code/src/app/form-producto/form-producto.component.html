@@ -18,13 +18,19 @@
             </div><br>
             <div class="p-field">
                 <label for="precio_compra">Precio de compra<span class="text-danger">*</span></label>
-                <input name="precio_compra" id="precio_compra" formControlName="precio_compra" maxlength="11" required
-                    type="number" pInputText>
+                <p-inputNumber mode="decimal" 
+                                locale="de-DE" [minFractionDigits]="2" maxlength="11" required
+                                name="precio_compra" id="precio_compra" formControlName="precio_compra">
+                </p-inputNumber>
             </div><br>
             <div class="p-field">
                 <label for="precio_venta">Precio de venta<span class="text-danger">*</span></label>
-                <input name="precio_venta" id="precio_venta" formControlName="precio_venta" maxlength="11" required
-                    type="number" pInputText>
+                <!-- <input name="precio_venta" id="precio_venta" formControlName="precio_venta" maxlength="11" required
+                    type="number" pInputText> -->
+                <p-inputNumber mode="decimal" 
+                                locale="de-DE" [minFractionDigits]="2" maxlength="11" required
+                                name="precio_venta" id="precio_venta" formControlName="precio_venta">
+                </p-inputNumber>
             </div><br>
             <div class="p-field">
                 <label for="iva">IVA<span class="text-danger">*</span></label>
