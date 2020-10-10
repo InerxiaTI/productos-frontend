@@ -1,14 +1,16 @@
-<p-tabView>
-    <p-tabPanel header="Productos">
-        <router-outlet></router-outlet>
-    </p-tabPanel>
-    <p-tabPanel header="Proveedores">
-        <app-proveedor></app-proveedor>
-    </p-tabPanel>
-    <p-tabPanel header="Calculador">
-        <app-calculador></app-calculador>
-    </p-tabPanel>
-</p-tabView>
+<div class="card">
+    <div>
+        <!-- <p-button (click)="irProducto()" styleClass="p-button-text" label="Productos"></p-button>
+        <p-button (click)="irProveedor()" styleClass="p-button-text" label="Proveedores"></p-button>
+        <p-button (click)="irCalculador()" styleClass="p-button-text" label="Calculador"></p-button> -->
 
+        <button (click)="irProducto()" pButton pRipple type="button" label="Productos" class="p-button-text p-button-plain p-button-sm"></button>
+        <button (click)="irProveedor()" pButton pRipple type="button" label="Proveedores" class="p-button-text p-button-plain p-button-sm"></button>
+        <button (click)="irCalculador()" pButton pRipple type="button" label="Calculador" class="p-button-text p-button-plain p-button-sm"></button>
+    </div>
+</div>
 
+<div class="container">
 
+    <router-outlet></router-outlet>
+</div>
