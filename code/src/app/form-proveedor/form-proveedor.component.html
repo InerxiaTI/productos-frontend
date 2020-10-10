@@ -1,1 +1,47 @@
-<p>form-proveedor works!</p>
+<h2>Agregar un nuevo proveedor</h2>
+<span class="p-buttonset">
+    <button (click)="goBack()" pButton type="button" label="Atrás" icon="pi pi-chevron-left"
+        class="p-button-primary"></button>
+</span>
+<p-card>
+    <form [formGroup]="proveedorForm">
+        <div class="p-fluid">
+            <div class="p-field">
+                <label for="nombre_empresa">Nombre empresa<span class="text-danger">*</span></label>
+                <input name="nombre_empresa" id="nombre_empresa" formControlName="nombre_empresa" maxlength="100" required type="text"
+                    pInputText>
+            </div><br>
+            <div class="p-field">
+                <label for="telefono_empresa">Teléfono empresa</label>
+                <input name="telefono_empresa" id="telefono_empresa" formControlName="telefono_empresa" maxlength="10" type="number"
+                    pInputText>
+            </div><br>
+            <div class="p-field">
+                <label for="direccion_empresa">Dirección empresa</label>
+                <input name="direccion_empresa" id="direccion_empresa" formControlName="direccion_empresa" maxlength="255" type="text"
+                    pInputText>
+            </div><br>
+            <div class="p-field">
+                <label for="nombre_vendedor">Nombre vendedor</label>
+                <input name="nombre_vendedor" id="nombre_vendedor" formControlName="nombre_vendedor" maxlength="100" type="text"
+                    pInputText>
+            </div><br>
+            <div class="p-field">
+                <label for="telefono_vendedor">Teléfono vendedor</label>
+                <input name="telefono_vendedor" id="telefono_vendedor" formControlName="telefono_vendedor" maxlength="10" type="text"
+                    pInputText>
+            </div><br>
+            <div class="p-field">
+                <label for="observacion">Observación</label>
+                <input name="observacion" id="observacion" formControlName="observacion" maxlength="255" type="text"
+                    pInputText>
+            </div><br>
+    
+
+        </div>
+    </form>
+    <button pButton type="button" [label]="labelBoton" pRipple class="p-button-lg btn-block" (click)="onSubmit()"
+            [disabled]="!proveedorForm.valid"></button>
+</p-card>
+
+<p-toast position="top-left" [style]="{width: '90vw'}" key="tc"></p-toast>
